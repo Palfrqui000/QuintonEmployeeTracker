@@ -1,11 +1,12 @@
-//Importing all installs needed for app
+  //Importing all installs needed for app
 const mysql = require ('mysql2')
 const inquirer = require ('inquirer')
 const consoleTab = require ('console.table')
 
+require('dotenv').config()
 
 // Connecting to DATABASE
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : 'Rocky246!',
@@ -23,8 +24,8 @@ var connection = mysql.createConnection({
     promptUser();
   };
 
-// User is promted with folders to open up and view
-  const promptUser = () => {
+// User is prompted with folders to open up and view
+  const promptUser = () => 
     inquirer.prompt ([
       {
         type: 'list',
@@ -37,10 +38,54 @@ var connection = mysql.createConnection({
                   'Add a role', 
                   'Add an employee', 
                   'Update an employee role']
-      }
-    ])
+                }
+              ]) .then((answers) => {
+                const { choices } = answers; 
+          
+                if (choices === "View all departments") {
+                  showDepartments();
+                }
+          
+                if (choices === "View all roles") {
+                  showRoles();
+                }
+          
+                if (choices === "View all employees") {
+                  showEmployees();
+                }
+          
+                if (choices === "Add a department") {
+                  addDepartment();
+                }
+          
+                if (choices === "Add a role") {
+                  addRole();
+                }
+          
+                if (choices === "Add an employee") {
+                  addEmployee();
+                }
+          
+                if (choices === "Update an employee role") {
+                  updateEmployee();
+                }
+              });
 
-  }
- 
- 
- 
+              showDepartments = () => {
+                console.log('Showing all departments...\n');
+                const sql = `SELECT department.id AS id, department.name AS department FROM department`; 
+              
+              
+                connection.query(sql, (err, rows) => {
+                  if (err) throw err;
+                  console.table(rows);
+                  promptUser();
+                });
+              };
+           
+      
+      
+      
+               
+
+              
