@@ -71,9 +71,25 @@ const connection = mysql.createConnection({
                 }
               });
 
+
+                //Allows user to go into the tables
+
               showDepartments = () => {
                 console.log('Showing all departments...\n');
                 const sql = `SELECT department.id AS id, department.name AS department FROM department`; 
+              
+              
+                connection.query(sql, (err, rows) => {
+                  if (err) throw err;
+                  console.table(rows);
+                  promptUser();
+                });
+              };
+
+
+              showRoles = () => {
+                console.log('Showing all roles...\n');
+                const sql = `SELECT role.id AS id, role.name AS role FROM role`; 
               
               
                 connection.query(sql, (err, rows) => {
@@ -87,5 +103,15 @@ const connection = mysql.createConnection({
       
       
                
-
+              showEmployees = () => {
+                console.log('Showing all employees...\n');
+                const sql = `SELECT employee.id AS id, employee.name AS employee FROM employee`; 
+              
+              
+                connection.query(sql, (err, rows) => {
+                  if (err) throw err;
+                  console.table(rows);
+                  promptUser();
+                });
+              };
               
