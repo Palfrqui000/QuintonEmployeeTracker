@@ -39,3 +39,5 @@ The purpose of this file is to view work departments and accesing the tables to 
 To run the file in the terminal you have to first login to mysql and run the schema.sql file
 Then user needs to run node server to pull up the the choices to be selcted
 THen user can access the tables for the given database
+
+Video Link: https://drive.google.com/file/d/1LHYBg761nRhK5u8yexMlm4dBZMmEnLkc/view
